@@ -28,7 +28,7 @@ function setupAuthorMarks() {
 
 function toggleAuthorMarks() {
 	// Locate marks and toggling links.
-	var marks = $(".author-mark");
+	var marks = $("mark");
 	var toggles = $(".toggle-marks-highlight");
 	
 	// Add or remove highlighting CSS class depending on current status.
