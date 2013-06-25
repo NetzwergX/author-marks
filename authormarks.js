@@ -21,20 +21,40 @@ function setupAuthorMarks() {
 	var toggleLinks = $(".toggle-marks-highlight");
 	// Configure links to trigger toggling.
 	toggleLinks.bind("click", toggleAuthorMarks);
-	// Set initial highlighting state.
-	window.author_marks_highlighted = false;
+	// Create state array
+	window.author_marks_highlighted = new Array();
+	// Set initial states
+	toggleLinks.each(function() {
+		var selector =  $(this).data('author-mark-selector');
+		window.author_marks_highlighted[selector] = false;
+	});
 }
 
 
 function toggleAuthorMarks() {
-	// Locate marks and toggling links.
-	var marks = $(".author-mark");
-	var toggles = $(".toggle-marks-highlight");
+	// read microdata
+	var selector = $(this).data('author-mark-selector');
 	
+	// backward compatibility
+	if (selector == undefined) {
+		selector = '.author-mark';
+	}	
+	
+	// get highlight state
+	var doHighlight = !window.author_marks_highlighted[selector];
+	
+		
+	// Locate marks
+	var marks = $(highlight);
+	
+	// Locate toggles with same selector
+	var toggles = $('[data-author-mark-selector=' + selector + ']');
+
 	// Add or remove highlighting CSS class depending on current status.
+	window.author_marks_highlighted[selector] = doHighlight;
+	
 	var highlightedClass = "marks-highlighted";
-	var highlighted = window.author_marks_highlighted;
-	if (!highlighted) {
+	if (doHighlight) {
 		marks.addClass(highlightedClass);
 		toggles.addClass(highlightedClass);
 		toggles.html("Hide Author Marks");
@@ -45,7 +65,7 @@ function toggleAuthorMarks() {
 	}
 	
 	// Update current status.
-	window.author_marks_highlighted = !highlighted;
+	window.author_marks_highlighted[selector] = doHighlight;
 	
 	// Don't actually follow the toggling links.
 	return false;
