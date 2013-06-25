@@ -39,19 +39,20 @@ function setupAuthorMarks() {
 function toggleAuthorMarks() {
 	// read microdata
 	var selector = $(this).data('author-mark-selector');
-	
+
 	// get highlight state
 	var doHighlight = !window.author_marks_highlighted[selector];	
-		
+
 	// Locate marks
-	var marks = $(highlight);
-	
+	var marks = $(selector);
+    console.log(selector);
+
 	// Locate toggles with same selector
-	var toggles = $('[data-author-mark-selector=' + selector + ']');
+	var toggles = $('[data-author-mark-selector=\'' + selector + '\']');
 
 	// Add or remove highlighting CSS class depending on current status.
 	window.author_marks_highlighted[selector] = doHighlight;
-	
+
 	var highlightedClass = "marks-highlighted";
 	if (doHighlight) {
 		marks.addClass(highlightedClass);
@@ -62,10 +63,10 @@ function toggleAuthorMarks() {
 		toggles.removeClass(highlightedClass);
 		toggles.html("Show Author Marks");
 	}
-	
+
 	// Update current status.
 	window.author_marks_highlighted[selector] = doHighlight;
-	
+
 	// Don't actually follow the toggling links.
 	return false;
 }
