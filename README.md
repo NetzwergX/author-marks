@@ -63,13 +63,13 @@ You'll want to add these CSS styles:
 
 Just use the HTML5 `mark` tag with the `author-mark` class applied: `<mark class="author-mark">An important remark</mark>`.
 
-
 ## Toggling links
 
 You should add at least one link that your readers can use to toggle your author marks. Any old link will do, as long as it has the CSS class `.toggle-marks-highlight`.
 
 This JavaScript will add an appropriate on-click action to such links, to toggle the marks.
 
+Alternative, you can specify the selector (must not even be a class, it can be any given selector such as `.author-marks`, but also just `mark` to match any `<mark>` element) by setting the `data-author-marks-selector` microdata attribute on the toggle link. Highlighting will be switched on/off for different selectors independently.
 
 ## Support
 
