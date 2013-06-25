@@ -26,6 +26,11 @@ function setupAuthorMarks() {
 	// Set initial states
 	toggleLinks.each(function() {
 		var selector =  $(this).data('author-mark-selector');
+		// backward compatibility
+		if (selector == undefined) {
+			selector = '.author-mark';
+			$(this).data('author-mark-selector', selector);
+		}
 		window.author_marks_highlighted[selector] = false;
 	});
 }
@@ -35,14 +40,8 @@ function toggleAuthorMarks() {
 	// read microdata
 	var selector = $(this).data('author-mark-selector');
 	
-	// backward compatibility
-	if (selector == undefined) {
-		selector = '.author-mark';
-	}	
-	
 	// get highlight state
-	var doHighlight = !window.author_marks_highlighted[selector];
-	
+	var doHighlight = !window.author_marks_highlighted[selector];	
 		
 	// Locate marks
 	var marks = $(highlight);
